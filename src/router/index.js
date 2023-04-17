@@ -15,7 +15,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
       },
     ],},
-    //ruta para el dashboard 
+    //ruta para el dashboard
     {
       path: '/dashboard',
       component: () => import('@/layouts/default/Default.vue'),
