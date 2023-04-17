@@ -29,6 +29,43 @@ const routes = [
               ]
             },
 
+    {
+      path: '/evaluacion',
+      component: () => import('@/layouts/default/Default.vue'),
+      children: [
+        {
+          path: '',
+          name: 'Evaluacion',
+          component: () => import('@/views/Evaluacion.vue'),
+        
+        }
+                ]
+    },
+    {
+      path: '/gestionAE',
+      component: () => import('@/layouts/default/Default.vue'),
+      children: [
+        {
+          path: '',
+          name: 'GestionAE',
+          component: () => import('@/views/GestionAE.vue'),
+        
+        }
+                ]
+    },
+    {
+      path: '/gestionClases',
+      component: () => import('@/layouts/default/Default.vue'),
+      children: [
+        {
+          path: '',
+          name: 'GestionClases',
+          component: () => import('@/views/GestionClases.vue'),
+        
+        }
+                ]
+    },
+
 ]
 
 const router = createRouter({

@@ -58,6 +58,7 @@ const signInWithGoogle = async () => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
+      localStorage.setItem('token', token);
       router.push('dashboard');
     }
   ).catch((error) => {
