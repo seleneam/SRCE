@@ -7,7 +7,7 @@
         <h1 class="text-h4 font-weight-bold my-3">Dashboard</h1>
       </v-col>
     </v-row>
-
+    
     <v-row>
       <v-col sm="4">
         <v-card
@@ -25,14 +25,14 @@
           <v-card-title> Modulo de evaluacion de AE</v-card-title>
 
           <v-card-text>
-            Aqui podras mirar el desempeño
+            Aqui podras evaluar los atributos de egreso.
           </v-card-text>
 
           <v-card-actions>
             <v-btn
               color="primary"
               text
-              to="/dashboard/evaluacion"
+              to="/evaluacion"
             >
               Ir
             </v-btn>
@@ -53,16 +53,16 @@
             style="aspect-ratio: 1.78"
           ></v-img>
 
-          <v-card-title> Modulo de evaluacion de AE</v-card-title>
+          <v-card-title> Modulo de gestion de AE</v-card-title>
           <v-card-text>
-            Aqui podras mirar el desempeño
+            Aqui podras vincular los AE con los que estaras trabajando con respecto a tus clases.
           </v-card-text>
 
           <v-card-actions>
             <v-btn
               color="quaternary"
               text
-              to="/dashboard/evaluacion"
+              to="/gestionAE"
             >
               Ir
             </v-btn>
@@ -83,17 +83,17 @@
             style="aspect-ratio: 1.78"
           ></v-img>
 
-          <v-card-title> Modulo de evaluacion de AE</v-card-title>
+          <v-card-title> Modulo de gestión de clases</v-card-title>
 
           <v-card-text>
-            Aqui podras mirar el desempeño
+            Aquí podras vincular las clases de classroom con el sistema.
           </v-card-text>
 
           <v-card-actions>
             <v-btn
               color="primary"
               text
-              to="/dashboard/evaluacion"
+              to="/gestionClases"
             >
               Ir
             </v-btn>
@@ -104,4 +104,6 @@
   </v-responsive>
 
 </template>
-<script setup></script>
+<script setup>
+
+</script>
