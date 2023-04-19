@@ -6,7 +6,6 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -18,7 +17,6 @@ const firebaseConfig = {
   appId: "1:405308009612:web:f1c98565f4d0ce903d1fa9",
   measurementId: "G-1FR0SXXJQM"
 };
-
 // Initialize Firebase
 initializeApp(firebaseConfig);
 

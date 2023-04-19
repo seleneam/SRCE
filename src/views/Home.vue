@@ -3,6 +3,5 @@
 </template>
 
 <script setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
-  import SignIn from "@/views/SignIn.vue";
+  import SignIn from "@/layouts/default/SignIn.vue";
 </script>
