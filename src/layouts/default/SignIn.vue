@@ -45,35 +45,36 @@
 
 <script setup>
 import {ref, onMounted} from 'vue'
-import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import {useRouter} from 'vue-router';
+import axios from "axios";
 import MainLogo from '@/assets/SRCELogo.vue'
+import { useAccessStore } from "@/store/access";
 
 const router = useRouter()
 const auth = getAuth()
-const signInWithGoogle = async () => {
-  const provider = new GoogleAuthProvider()
-  await signInWithPopup(auth, provider).then(
-    (result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-      localStorage.setItem('token', token);
-      router.push('dashboard');
+const accessStore = useAccessStore()
+const user = ref(auth.currentUser)
+const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
+  signInWithPopup(auth , provider)
+    .then(async (res) => {
+      accessStore.$state.access_token = res._tokenResponse.oauthAccessToken
+    })
+    .catch((error) => {
+      console.log(error)
     }
-  ).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    const email = error.email;
-    const credential = GoogleAuthProvider.credentialFromError(error);
-  });
+  )
 }
 
-const user = ref(auth.currentUser)
-
 onMounted(() => {
-  auth.onAuthStateChanged((newUser) => {
-    user.value = newUser
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      router.push({ name: 'Dashboard' })
+    } else {
+      accessStore.$reset()
+    }
   })
 })
 
