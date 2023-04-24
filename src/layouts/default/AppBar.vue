@@ -7,7 +7,7 @@
       <v-btn icon="mdi-logout" color="white" @click="logOut"></v-btn>
     </template>
   </v-app-bar>
-</template>
+</template> 
 
 <script setup>
   defineProps({
@@ -17,7 +17,8 @@
     },
     logOut: {
       type: Function,
-      default: () => {}
+      default: () => {
+      }
     }
   })
 </script>

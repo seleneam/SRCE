@@ -45,11 +45,12 @@
 
 <script setup>
 import {ref, onMounted} from 'vue'
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
 import {useRouter} from 'vue-router';
 import axios from "axios";
 import MainLogo from '@/assets/SRCELogo.vue'
 import { useAccessStore } from "@/store/access";
+import Swal from 'sweetalert2';
 
 const router = useRouter()
 const auth = getAuth()
@@ -60,23 +61,31 @@ const signInWithGoogle = () => {
   provider.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
   signInWithPopup(auth , provider)
     .then(async (res) => {
-      accessStore.$state.access_token = res._tokenResponse.oauthAccessToken
+      const email = res.user.email;
+      if (email.endsWith('@uabc.edu.mx')) {
+        accessStore.$state.access_token = res._tokenResponse.oauthAccessToken;
+        //onMounted(() => {
+          //auth.onAuthStateChanged((user) => {
+          //  if (user) {
+              router.push({ name: 'Dashboard' })
+          //  } else {
+          //    accessStore.$reset()
+          //  }
+          //})
+        //})
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El dominio del correo electrónico no es válido para iniciar sesión',
+          confirmButtonText: 'Ok'
+        })
+      }
     })
     .catch((error) => {
       console.log(error)
     }
   )
 }
-
-onMounted(() => {
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      router.push({ name: 'Dashboard' })
-    } else {
-      accessStore.$reset()
-    }
-  })
-})
-
 
 </script>

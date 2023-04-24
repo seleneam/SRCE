@@ -1,6 +1,6 @@
 <template>
-
-  <AppBar title="Dashboard"/>
+ 
+  <AppBar  ::title="Dashboard" :logOut="goToHome"/>
   <v-app>
     <v-main>
       <v-container>
@@ -58,6 +58,10 @@
 import {useRouter} from 'vue-router'
 import {ref} from 'vue'
 import AppBar from "@/layouts/default/AppBar.vue";
+import { getAuth, signOut } from "firebase/auth";
+import Swal from 'sweetalert2';
+
+const auth = getAuth();
 
 const router = useRouter()
 
@@ -86,4 +90,22 @@ const goTo = (path) => {
   router.push(path)
 }
 
+const goToHome = () => {
+  signOut(auth)
+  .then(() => {
+    router.push('Signin');
+  })
+  .catch((error) => {
+    Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Problemas al finalizar sesion',
+          confirmButtonText: 'Ok'
+    })
+  });
+  
+};
+
+
 </script>
+

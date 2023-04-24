@@ -66,6 +66,18 @@ const routes = [
       }
     ]
   },
+  {
+    path: '/Signin',
+    component: () => import('@/layouts/default/Default.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Signin',
+        component: () => import('@/layouts/default/Signin.vue'),
+
+      }
+    ]
+  },
 
 ]
 
