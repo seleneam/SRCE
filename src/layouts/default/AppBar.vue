@@ -10,14 +10,28 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+import { useAccessStore } from '@/store/access'
+import { signOut, getAuth } from 'firebase/auth'
+
+const router = useRouter()
+const store = useAccessStore()
+const auth = getAuth()
+
   defineProps({
     title: {
       type: String,
       default: 'Dashboard'
-    },
-    logOut: {
-      type: Function,
-      default: () => {}
     }
   })
+
+const logOut = () => {
+  signOut(auth).then(() => {
+    store.$reset()
+    router.push({ name: 'Home' })
+  }).catch((error) => {
+    console.log(error)
+  })
+}
+
 </script>

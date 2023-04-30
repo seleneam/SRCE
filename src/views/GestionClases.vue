@@ -9,7 +9,17 @@
         </v-app-bar>
         <v-main>
           <v-container>
-
+            <v-card
+              color="secondary"
+              rounded="lg"
+              class="mx-auto my-5"
+              variant="elevated"
+              v-for="course in courses">
+              <v-card-item
+                :title="course.name"
+                :subtitle="course.descriptionHeading"
+              />
+            </v-card>
           </v-container>
         </v-main>
       </v-app>
@@ -30,19 +40,13 @@
   async function goBack() {
     window.history.length > 1 ? router.go(-1) : await router.push('/')
   }
-  async function listCourses(token) {
+  async function listCourses() {
     const response = await axios.post('https://localhost:4001/courses', {
-      token: token,
+      access: accessStore.$state.access_token,
     })
-    console.log(response)
+    courses.value = response.data.courses
   }
   onMounted(async () => {
-    const token = accessStore.$state.access_token
-    if (token) {
-      const clases = await listCourses(token)
-      console.log(clases)
-    } else {
-      await router.push({name: 'Dashboard'})
-    }
+    await listCourses()
   })
   </script>

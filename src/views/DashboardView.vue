@@ -13,9 +13,9 @@
                    :key="item.title"
             >
               <v-card
-                class="mx-auto bg-white rounded-lg"
+                class="mx-auto bg-white rounded-lg py-3 my-3"
                 max-width="334"
-                max-height="365"
+                max-height="395"
                 color="accent2"
                 variant="elevated"
               >
@@ -33,10 +33,11 @@
                   </div>
                 </v-card-text>
                 <v-card-actions
-                  class="d-flex align-content-end px-4 pb-4"
+                  class="d-flex align-start px-4 mb-4"
                 >
                   <v-btn
-                    variant="tonal"
+                    class="px-3"
+                    variant="text"
                     color="primary"
                     @click="goTo(item.to)"
                   >
@@ -64,7 +65,7 @@ const router = useRouter()
 const cardItems = ref([
   {
     title: "Evaluación de AE",
-    text: "Aqui podras evaluar los atributos de egreso.",
+    text: "Aqui podras evaluar los atributos de egreso correspondientes a tus clases.",
     to: "/evaluacion",
     cover: "https://cdn.bizneo.com/blog/wp-content/uploads/2020/05/formato-de-evaluacion-del-desempen%CC%83o.webp"
   },

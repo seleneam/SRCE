@@ -44,23 +44,34 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
+import { ref, onMounted } from 'vue'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import {useRouter} from 'vue-router';
-import axios from "axios";
+import { useRouter } from 'vue-router';
 import MainLogo from '@/assets/SRCELogo.vue'
 import { useAccessStore } from "@/store/access";
+import Swal from 'sweetalert2'
 
 const router = useRouter()
 const auth = getAuth()
 const accessStore = useAccessStore()
-const user = ref(auth.currentUser)
+
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
   signInWithPopup(auth , provider)
     .then(async (res) => {
-      accessStore.$state.access_token = res._tokenResponse.oauthAccessToken
+      if ( res.user.email.endsWith('@uabc.edu.mx') ) {
+        accessStore.$state.access_token = res._tokenResponse.oauthAccessToken
+        await router.push({ name: 'Dashboard' })
+      } else {
+        await Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No tienes acceso a este sistema',
+          footer: 'Si crees que esto es un error, contacta a tu administrador',
+          confirmButtonText: 'Ok'
+        })
+      }
     })
     .catch((error) => {
       console.log(error)
@@ -69,13 +80,6 @@ const signInWithGoogle = () => {
 }
 
 onMounted(() => {
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      router.push({ name: 'Dashboard' })
-    } else {
-      accessStore.$reset()
-    }
-  })
 })
 
 
