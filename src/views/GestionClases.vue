@@ -32,6 +32,7 @@
   import {onMounted, ref} from 'vue'
   import { useAccessStore } from '@/store/access'
 
+  import  {listCourses} from '../services/classroomApi'
   const router = useRouter()
   const accessStore = useAccessStore()
   const courses = ref([])
@@ -40,13 +41,16 @@
   async function goBack() {
     window.history.length > 1 ? router.go(-1) : await router.push('/')
   }
-  async function listCourses() {
-    const response = await axios.post('https://localhost:4001/courses', {
-      access: accessStore.$state.access_token,
-    })
-    courses.value = response.data.courses
-  }
+  async function fetchCourses() {
+    try {
+        const coursesData = await  listCourses(accessStore.$state.access_token);
+        courses.value = coursesData;
+    } catch (error) {
+        console.error('Error listing courses:', error);
+    }
+}
+
   onMounted(async () => {
-    await listCourses()
+    await fetchCourses()
   })
   </script>
