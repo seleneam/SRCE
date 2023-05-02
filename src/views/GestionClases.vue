@@ -18,6 +18,7 @@
               <v-card-item
                 :title="course.name"
                 :subtitle="course.descriptionHeading"
+                @click="showCourseWork(course.id)"
               />
             </v-card>
           </v-container>
@@ -27,28 +28,31 @@
   </template>
 
   <script setup>
-  import axios from 'axios'
   import {useRouter} from 'vue-router'
   import {onMounted, ref} from 'vue'
   import { useAccessStore } from '@/store/access'
-
-  import  {listCourses} from '../services/classroomApi'
+  import { listCourses, getCourseWork } from '@/services/classroomApi'
   const router = useRouter()
   const accessStore = useAccessStore()
   const courses = ref([])
   const loading = ref(true)
-
   async function goBack() {
     window.history.length > 1 ? router.go(-1) : await router.push('/')
   }
   async function fetchCourses() {
     try {
-        const coursesData = await  listCourses(accessStore.$state.access_token);
-        courses.value = coursesData;
+      const response = await listCourses()
+      console.log(response)
+      courses.value =  response
     } catch (error) {
-        console.error('Error listing courses:', error);
+      console.error('Error listing courses:', error);
     }
-}
+  }
+
+  async function showCourseWork(courseId) {
+    const courseWork = await getCourseWork(courseId)
+    console.log(courseWork)
+  }
 
   onMounted(async () => {
     await fetchCourses()

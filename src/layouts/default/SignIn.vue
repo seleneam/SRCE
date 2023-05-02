@@ -58,6 +58,8 @@ const accessStore = useAccessStore()
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/classroom.courses.readonly')
+  provider.addScope('https://www.googleapis.com/auth/classroom.coursework.me.readonly')
+  provider.addScope('https://www.googleapis.com/auth/classroom.coursework.students.readonly')
   signInWithPopup(auth , provider)
     .then(async (res) => {
       if ( res.user.email.endsWith('@uabc.edu.mx') ) {

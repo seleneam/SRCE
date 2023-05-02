@@ -1,11 +1,13 @@
 import axios from 'axios';
+import { useAccessStore } from "@/store/access";
 
 const API_URL = 'https://localhost:4001';
+const accessStore = useAccessStore()
 
-export const listCourses = async (access_token) => {
+export const listCourses = async () => {
     try {
         const response = await axios.post(`${API_URL}/courses`, {
-            token: access_token
+            token: accessStore.$state.access_token
         });
         return response.data.courses;
     } catch (error) {
@@ -14,10 +16,10 @@ export const listCourses = async (access_token) => {
     }
 }
 
-export const getCourseWork= async (access_token, courseId)=> {
+export const getCourseWork= async (courseId)=> {
     try {
         const response = await axios.post(`${API_URL}/courses/coursework`, {
-            token: access_token,
+            token: accessStore.$state.access_token,
             courseId: courseId
         });
         return response.data.courseWork;
@@ -26,4 +28,3 @@ export const getCourseWork= async (access_token, courseId)=> {
         throw error;
     }
 }
- 
