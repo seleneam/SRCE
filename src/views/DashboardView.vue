@@ -65,19 +65,19 @@ const router = useRouter()
 const cardItems = ref([
   {
     title: "Evaluación de AE",
-    text: "Aqui podras evaluar los atributos de egreso correspondientes a tus clases.",
+    text: "Aquí podrás evaluar los atributos de egreso correspondientes a tus clases.",
     to: "/evaluacion",
     cover: "https://cdn.bizneo.com/blog/wp-content/uploads/2020/05/formato-de-evaluacion-del-desempen%CC%83o.webp"
   },
   {
     title: "Gestión de AE",
-    text: "Aqui podras vincular los AE con los que estaras trabajando con respecto a tus clases.",
+    text: "Aquí podrás vincular los AE con los que estarás trabajando con respecto a tus clases.",
     to: "/gestionAE",
     cover: "https://cdn.bizneo.com/blog/wp-content/uploads/2020/05/formato-de-evaluacion-del-desempen%CC%83o.webp"
   },
   {
     title: "Gestión de clases",
-    text: "Aquí podras vincular las clases de classroom con el sistema.",
+    text: "Aquí podrás vincular las clases de classroom con el sistema.",
     to: "/gestionClases",
     cover: "https://cdn.bizneo.com/blog/wp-content/uploads/2020/05/formato-de-evaluacion-del-desempen%CC%83o.webp",
   }
