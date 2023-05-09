@@ -62,9 +62,10 @@ const signInWithGoogle = () => {
   provider.addScope('https://www.googleapis.com/auth/classroom.coursework.students.readonly')
   signInWithPopup(auth , provider)
     .then(async (res) => {
-      if ( res.user.email.endsWith('@uabc.edu.mx') ) {
+      //if ( res.user.email.endsWith('@uabc.edu.mx') ) {
+        //userStore.setUserData(res.user)
         accessStore.$state.access_token = res._tokenResponse.oauthAccessToken
-        await router.push({ name: 'Dashboard' })
+        await router.push({ name: 'Dashboard' })/*
       } else {
         await Swal.fire({
           icon: 'error',
@@ -73,7 +74,7 @@ const signInWithGoogle = () => {
           footer: 'Si crees que esto es un error, contacta a tu administrador',
           confirmButtonText: 'Ok'
         })
-      }
+      }*/ 
     })
     .catch((error) => {
       console.log(error)

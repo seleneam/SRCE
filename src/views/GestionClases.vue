@@ -20,6 +20,13 @@
                 :subtitle="course.descriptionHeading"
                 @click="showCourseWork(course.id)"
               />
+              
+              <v-btn
+              color="secundary"
+              @click="agregarCursoBD(course.id, course.name)"
+              >
+                Añadir curso
+              </v-btn>
             </v-card>
           </v-container>
         </v-main>
@@ -39,6 +46,16 @@
   async function goBack() {
     window.history.length > 1 ? router.go(-1) : await router.push('/')
   }
+
+
+  async function agregarCursoBD(courseID, courseName){
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+      /*DESPLIEGUE DE CURSO*/
   async function fetchCourses() {
     try {
       const response = await listCourses()
@@ -48,10 +65,11 @@
       console.error('Error listing courses:', error);
     }
   }
-
+        /*DESPLIEGUE DE TAREAS*/ 
   async function showCourseWork(courseId) {
     const courseWork = await getCourseWork(courseId)
-    console.log(courseWork)
+    
+    console.log(courseWork) /*Here*/
   }
 
   onMounted(async () => {
