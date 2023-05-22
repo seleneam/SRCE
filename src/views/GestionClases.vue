@@ -48,6 +48,8 @@ async function goBack() {
   window.history.length > 1 ? router.go(-1) : await router.push("/");
 }
 
+/*Agregar el curso al docente*/
+
 async function agregarCursoBD(
   id_Asignatura,
   nombreAsignatura,

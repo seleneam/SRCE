@@ -6,9 +6,35 @@ const accessStore = useAccessStore();
 
 export const getSelectedCourses = async () => {
   try {
-    return "Hola";
+    const response = await axios.post(`${API_URL}/courses/bdGetUserCourses`, {
+      token: accessStore.$state.access_token,
+    });
+
+    return response.data;
   } catch (error) {
     return error;
+  }
+};
+
+export const getTareasCurso = async () => {
+  try {
+    const response = await axios.post(`${API_URL}/courses/getTareasCurso`, {
+      token: accessStore.$state.access_token,
+    });
+
+    return response.data;
+  } catch (error) {}
+};
+
+export const getTree = async (ae) => {
+  try {
+    const response = await axios.post(`${API_URL}/courses/bdGetTree`, {
+      ae: ae,
+    });
+
+    return response;
+  } catch (error) {
+    console.log(error);
   }
 };
 
