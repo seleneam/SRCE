@@ -4,6 +4,14 @@ import { useAccessStore } from "@/store/access";
 const API_URL = "https://localhost:4001";
 const accessStore = useAccessStore();
 
+export const getSelectedCourses = async () => {
+  try {
+    return "Hola";
+  } catch (error) {
+    return error;
+  }
+};
+
 export const saveClass = async (
   id_Asignatura,
   nombreAsignatura,

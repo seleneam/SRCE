@@ -9,16 +9,18 @@
       </v-app-bar>
       <v-main>
         <v-container class="">
-          <v-row no-gutters>
-            <v-col>
-              <v-sheet class="pa-2 ma-2">
-                <v-btn class="px-5 mr-5">class1</v-btn>
-                <v-btn class="px-5 mr-5">class2</v-btn>
-                <v-btn class="px-5 mr-5">class3</v-btn>
-              </v-sheet>
+          <v-row>
+            <!--AQUI SE INSTANCIAN LOS BOTONES DE LAS CLASES-->
+            <v-col sm="2" v-for="item in cardItems" :key="item.title">
+              <v-card>
+                <v-card-actions class="">
+                  <v-btn>{{ item.title }}</v-btn>
+                </v-card-actions>
+              </v-card>
             </v-col>
           </v-row>
-          <v-row no-gutters>
+          <v-row>
+            <!--AQUI SE INSTANCIAN LOS VALORES DE LA BD CON RESPECTO AL BOTON SELECCIONADO-->
             <v-col cols="2">
               <v-sheet class="pa-2 ma-2">
                 <v-card class="mx-auto pa-2" max-width="300">
@@ -60,8 +62,44 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
+import { onMounted, ref } from "vue";
+import { getSelectedCourses } from "@/services/classroomApi";
 const router = useRouter();
+const courses = ref([]);
 async function goBack() {
   window.history.length > 1 ? router.go(-1) : await router.push("/");
 }
+
+const cardItems = ref([
+  {
+    title: "Boton 1",
+
+    to: "/evaluacion",
+  },
+  {
+    title: "Boton 2",
+
+    to: "/gestionAE",
+  },
+  {
+    title: "Boton 3",
+
+    to: "/gestionClases",
+  },
+]);
+
+async function fetchCourses() {
+  try {
+    const response = await getSelectedCourses();
+    console.log(response);
+    courses.value = "1";
+  } catch (error) {
+    console.error("Error listing courses:", error);
+  }
+}
+
+onMounted(async () => {
+  ventanaConfirmar: false;
+  await fetchCourses();
+});
 </script>
