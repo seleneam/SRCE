@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useAccessStore } from "@/store/access";
 
-const API_URL = "https://localhost:4001";
+const API_URL = "https://srce-backend-production.up.railway.app";
 const accessStore = useAccessStore();
 
 export const getSelectedCourses = async () => {
