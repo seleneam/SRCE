@@ -1,5 +1,5 @@
 <template>
-  <AppBar title="Dashboard" />
+  <AppBar/>
   <v-app>
     <v-main>
       <v-container>
@@ -45,7 +45,7 @@
 </template>
 <script setup>
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import {ref, toRefs} from "vue";
 import AppBar from "@/layouts/default/AppBar.vue";
 
 const router = useRouter();

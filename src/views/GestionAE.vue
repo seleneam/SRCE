@@ -1,12 +1,7 @@
 <template>
   <div>
+    <AppBar/>
     <v-app>
-      <v-app-bar app color="primary" dark>
-        <v-btn icon @click="goBack" color="white">
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <v-toolbar-title>Gestión de AE</v-toolbar-title>
-      </v-app-bar>
       <v-main>
         <v-container class="">
           <v-row no-gutters>
@@ -60,6 +55,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
+import AppBar from "@/layouts/default/AppBar.vue";
 const router = useRouter();
 async function goBack() {
   window.history.length > 1 ? router.go(-1) : await router.push("/");

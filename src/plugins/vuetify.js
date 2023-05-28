@@ -21,6 +21,9 @@ import { VDataTable } from 'vuetify/labs/VDataTable'
 export default createVuetify({
   blueprint: md3,
   theme: {
+    options:{
+      customProperties: true,
+    },
     themes: {
       light: {
         colors: {

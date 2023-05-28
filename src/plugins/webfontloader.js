@@ -10,9 +10,9 @@ export async function loadFonts () {
   webFontLoader.load({
     google: {
       // add the Poppins  to the project
-
-      families: ['Poppins:400,500,600,700'],
-
+      families: [
+        'Noto Serif:400,500,600,700',
+      ],
     },
   })
 }
