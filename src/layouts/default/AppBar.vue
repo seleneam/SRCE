@@ -1,34 +1,78 @@
 <template>
-  <v-app-bar
-    color="primary">
-    <v-app-bar-title> {{ title }} </v-app-bar-title>
-    <template v-slot:append>
-      <v-btn icon="mdi-dots-vertical" color="white"></v-btn>
-      <v-btn icon="mdi-logout" color="white" @click="logOut"></v-btn>
+  <v-navigation-drawer
+    permanent
+    location="left"
+  >
+    <template v-slot:prepend>
+      <v-list-item
+        lines="two"
+        :prepend-avatar="user.profilePicture"
+        subtitle="Logged in"
+      ></v-list-item>
     </template>
-  </v-app-bar>
+
+    <v-divider></v-divider>
+
+    <v-list density="compact" nav>
+      <v-list-item
+        v-for="item in navDrawerItems"
+        :key="item.title"
+        :prepend-icon="item.icon"
+        :title="item.title"
+        :value="item.value"
+        variant="text"
+        active-color="#191D26"
+        link :to="item.to"
+      />
+    </v-list>
+    <template v-slot:append>
+      <div class="pa-8">
+        <v-btn
+          variant="flat"
+          block
+          color="#191D26"
+          @click="logOut"
+        >
+          <v-icon left color="#EAE0E0"
+                  style="scale: 90%">
+            mdi-logout
+          </v-icon>
+          <v-spacer class="px-1"/>
+          <span class="text-uppercase"
+                style="color:#EAE0E0; font-size: 0.85rem; "
+          >
+            Cerrar sesión
+          </span>
+        </v-btn>
+      </div>
+    </template>
+  </v-navigation-drawer>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { useAccessStore } from '@/store/access'
-import { signOut, getAuth } from 'firebase/auth'
+import {useRouter} from 'vue-router'
+import {useAccessStore} from '@/store/access'
+import {signOut, getAuth} from 'firebase/auth'
+import {ref} from "vue";
 
 const router = useRouter()
 const store = useAccessStore()
 const auth = getAuth()
 
-  defineProps({
-    title: {
-      type: String,
-      default: 'Dashboard'
-    }
-  })
+const accessStore = useAccessStore();
+const user = ref(accessStore.user);
+
+const navDrawerItems = ref([
+  {title: "Home", icon: "mdi-home", value:"home", to: "/home"},
+  {title: "Evaluación", icon: "mdi-clipboard-check", value:"evaluacion", to: "/evaluacion"},
+  {title: "Gestión", icon: "mdi-clipboard-list", value: "gestionAE", to: "/gestionAE"},
+  {title: "Clases", icon: "mdi-school", value: "gestionClases", to: "/gestionClases"},
+]);
 
 const logOut = () => {
   signOut(auth).then(() => {
     store.$reset()
-    router.push({ name: 'Home' })
+    router.push({name: 'SignIn'})
   }).catch((error) => {
     console.log(error)
   })

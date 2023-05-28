@@ -3,28 +3,28 @@ import {createRouter, createWebHistory} from 'vue-router'
 
 const routes = [
   {
-    path: '/',
+    path: '/signIn',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
         path: '',
-        name: 'Home',
+        name: 'SignIn',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '@/layouts/default/SignIn'),
       },
     ],
   },
   //ruta para el dashboard
   {
-    path: '/dashboard',
+    path: '/home',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
         path: '',
-        name: 'Dashboard',
-        component: () => import('@/views/DashboardView.vue'),
+        name: 'Home',
+        component: () => import('@/views/Home.vue'),
 
       }
     ]
