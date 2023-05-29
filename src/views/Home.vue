@@ -2,14 +2,14 @@
   <v-app>
     <v-main class="flex-grow-1">
       <SideBar/>
-      <div style="padding: 2rem; margin: 50px;">
+      <div style="padding: 2rem; margin-left: 75px;">
         <h4 class="text-uppercase text-start py-0" style="font-size: 1.2rem;">
           Bienvenido de vuelta al
         </h4>
-        <h1 class="title text-uppercase text-start pb-4">
+        <h1 class="title text-uppercase text-start pb-3">
           Sistema de Recolección de <br> Competencias Estudiantiles
         </h1>
-        <v-spacer class="mx-auto my-5"></v-spacer>
+        <v-spacer class="mx-auto my-4"></v-spacer>
       </div>
       <v-container>
         <v-sheet
