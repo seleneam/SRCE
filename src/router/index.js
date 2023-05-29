@@ -16,7 +16,6 @@ const routes = [
       },
     ],
   },
-  //ruta para el dashboard
   {
     path: '/home',
     component: () => import('@/layouts/default/Default.vue'),
@@ -25,7 +24,10 @@ const routes = [
         path: '',
         name: 'Home',
         component: () => import('@/views/Home.vue'),
-
+        meta: {
+          requiresAuth: true,
+          title: 'Home',
+        }
       }
     ]
   },
@@ -38,7 +40,10 @@ const routes = [
         path: '',
         name: 'Evaluacion',
         component: () => import('@/views/Evaluacion.vue'),
-
+        meta: {
+          requiresAuth: true,
+          title: 'Mis Evaluaciones',
+        }
       }
     ]
   },
@@ -50,7 +55,10 @@ const routes = [
         path: '',
         name: 'GestionAE',
         component: () => import('@/views/GestionAE.vue'),
-
+        meta: {
+          requiresAuth: true,
+          title: 'Gestión de Atributos de Egreso',
+        }
       }
     ]
   },
@@ -62,6 +70,10 @@ const routes = [
         path: '',
         name: 'GestionClases',
         component: () => import('@/views/GestionClases.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Mis Asignaturas',
+        }
 
       }
     ]

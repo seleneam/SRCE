@@ -4,7 +4,7 @@ export const useAccessStore = defineStore('access', {
   state: () => ({
     access_token: "",
     user: {
-      username: "",
+      name: "",
       profilePicture: "",
       auth: false,
     },

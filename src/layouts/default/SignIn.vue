@@ -2,7 +2,7 @@
   <div class="main_container fade-in">
     <v-spacer class="mx-auto my-5"></v-spacer>
     <h1 class="title text-center text-uppercase">
-      Sistema Gestor de <br> Competencias Estudiantiles</h1>
+      Sistema Recolector de <br> Competencias Estudiantiles</h1>
     <v-btn
       class="login_button text-uppercase text-center mx-5"
       style="width: 15vw;"

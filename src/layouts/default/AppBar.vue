@@ -1,81 +1,27 @@
 <template>
-  <v-navigation-drawer
-    permanent
-    location="left"
+  <v-app-bar
+    density="compact"
+    rounded="lg"
+    border
+    color="transparent"
+    height="79"
   >
-    <template v-slot:prepend>
-      <v-list-item
-        lines="two"
-        :prepend-avatar="user.profilePicture"
-        subtitle="Logged in"
-      ></v-list-item>
-    </template>
-
-    <v-divider></v-divider>
-
-    <v-list density="compact" nav>
-      <v-list-item
-        v-for="item in navDrawerItems"
-        :key="item.title"
-        :prepend-icon="item.icon"
-        :title="item.title"
-        :value="item.value"
-        variant="text"
-        active-color="#191D26"
-        link :to="item.to"
-      />
-    </v-list>
-    <template v-slot:append>
-      <div class="pa-8">
-        <v-btn
-          variant="flat"
-          block
-          color="#191D26"
-          @click="logOut"
-        >
-          <v-icon left color="#EAE0E0"
-                  style="scale: 90%">
-            mdi-logout
-          </v-icon>
-          <v-spacer class="px-1"/>
-          <span class="text-uppercase"
-                style="color:#EAE0E0; font-size: 0.85rem; "
-          >
-            Cerrar sesión
-          </span>
-        </v-btn>
-      </div>
-    </template>
-  </v-navigation-drawer>
+    <v-app-bar-title
+      style="font-size: 1.6rem; padding: 1rem; width: auto;"
+    >
+      <h4>{{ title }}</h4>
+    </v-app-bar-title>
+  </v-app-bar>
 </template>
 
 <script setup>
-import {useRouter} from 'vue-router'
-import {useAccessStore} from '@/store/access'
-import {signOut, getAuth} from 'firebase/auth'
-import {ref} from "vue";
+import {useRouter} from "vue-router";
+import {onMounted, ref} from "vue";
 
 const router = useRouter()
-const store = useAccessStore()
-const auth = getAuth()
-
-const accessStore = useAccessStore();
-const user = ref(accessStore.user);
-
-const navDrawerItems = ref([
-  {title: "Home", icon: "mdi-home", value:"home", to: "/home"},
-  {title: "Evaluación", icon: "mdi-clipboard-check", value:"evaluacion", to: "/evaluacion"},
-  {title: "Gestión", icon: "mdi-clipboard-list", value: "gestionAE", to: "/gestionAE"},
-  {title: "Clases", icon: "mdi-school", value: "gestionClases", to: "/gestionClases"},
-]);
-
-const logOut = () => {
-  signOut(auth).then(() => {
-    store.$reset()
-    router.push({name: 'SignIn'})
-  }).catch((error) => {
-    console.log(error)
-  })
-}
+const title = ref('')
+onMounted(() => {
+   title.value = router.currentRoute.value.meta.title
+})
 
 </script>

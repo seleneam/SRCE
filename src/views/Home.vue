@@ -1,54 +1,66 @@
 <template>
-  <AppBar/>
   <v-app>
-    <v-main>
+    <SideBar/>
+    <div class="px-1">
+      <h4 class="text-uppercase text-start py-0" style="font-size: 1.2rem;">
+        Bienvenido de vuelta al
+      </h4>
+      <h1 class="title text-uppercase text-start pb-4">
+        Sistema de Recolección de <br> Competencias Estudiantiles
+      </h1>
+      <v-spacer class="mx-auto my-5"></v-spacer>
+    </div>
+    <v-main class="flex-grow-1">
       <v-container>
-        <v-responsive
-          class="auth-wrapper d-flex align-center justify-center pa-4 bg-accent fill-height"
-        >
-          <v-row>
-            <v-col sm="4" v-for="item in cardItems" :key="item.title">
-              <v-card
-                class="mx-auto bg-white rounded-lg py-3 my-3"
-                max-width="334"
-                max-height="395"
-                color="accent2"
-                variant="elevated"
-              >
-                <v-img :src="item.cover" height="194"></v-img>
+        <v-sheet
+          color="transparent"
+          class="d-flex flex-wrap flex-1-0 justify-center justify-lg-center justify-md-center overflow-auto w-auto h-auto"
+          height="50vh">
+          <v-card
+            v-for="item in cardItems" :key="item.title"
+            color="#181c25"
+            rounded="lg"
+            class="d-flex flex-column my-6 pa-2 mx-4"
+            variant="plain"
+            min-width="400"
+            max-width="400"
+            min-height="150"
+          >
+            <v-img :src="item.cover" height="200px" cover></v-img>
 
-                <v-card-text>
-                  <div class="text-h6 font-weight-semibold mb-1 text-left py-2">
-                    {{ item.title.toLocaleUpperCase() }}
-                  </div>
-                  <div class="text-body-4 text-medium-emphasis text-justify">
-                    {{ item.text }}
-                  </div>
-                </v-card-text>
-                <v-card-actions class="d-flex align-start px-4 mb-4">
-                  <v-btn
-                    class="px-3"
-                    variant="text"
-                    color="primary"
-                    @click="goTo(item.to)"
-                  >
-                    Ir al modulo
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-responsive>
+            <v-card-text>
+              <div class="text-h6 font-weight-semibold mb-1 text-left py-2">
+                {{ item.title.toLocaleUpperCase() }}
+              </div>
+              <div class="text-body-4 text-medium-emphasis text-justify">
+                {{ item.text }}
+              </div>
+            </v-card-text>
+            <v-card-actions class="d-flex align-start px-4 mb-4">
+              <v-btn
+                class="px-3"
+                variant="text"
+                color="primary"
+                @click="goTo(item.to)"
+              >
+                Ir al modulo
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-sheet>
       </v-container>
     </v-main>
   </v-app>
 </template>
 <script setup>
-import { useRouter } from "vue-router";
-import { ref } from "vue";
-import AppBar from "@/layouts/default/AppBar.vue";
+import {useRouter} from "vue-router";
+import {ref} from "vue";
+import SideBar from "@/layouts/default/SideBar.vue";
+import {useAccessStore} from "@/store/access";
 
 const router = useRouter();
+const accessStore = useAccessStore();
+const user = accessStore.getUserProps;
 
 const cardItems = ref([
   {

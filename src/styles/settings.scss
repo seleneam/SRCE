@@ -2,10 +2,10 @@
 $body-font-family: 'Mulish', sans-serif;
 $header-font-family: 'Noto Serif', serif;
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
   font-family: $header-font-family, sans-serif !important;
 }
 
-body {
+h4, h5, h6, body {
   font-family: $body-font-family, sans-serif !important;
 }
