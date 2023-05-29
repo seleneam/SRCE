@@ -8,20 +8,9 @@
             <h1 class="title text-uppercase text-start pb-4">
               Gestion de Clases
             </h1>
-            <v-card
-              color="blue-lighten-4"
-              rounded="lg"
-              class="d-flex flex-column"
-              variant="flat"
-              width="570px"
-            >
-              <v-card-text>
-                <div class="text-medium-emphasis text-justify">
-                  <v-icon color="blue-darken-2">mdi-information-outline</v-icon>
-                  Para añadir una clase al sistema, debe dar click en el botón "Añadir"
-                </div>
-              </v-card-text>
-            </v-card>
+            <p class="text-body-1 text-medium-emphasis text-justify">
+              En esta sección podrá gestionar las clases que se encuentran en su cuenta de Google Classroom.
+            </p>
             <v-spacer class="mx-auto my-5"></v-spacer>
           </div>
 
