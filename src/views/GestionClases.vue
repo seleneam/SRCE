@@ -2,24 +2,41 @@
   <div>
     <v-app>
       <v-main>
-       <side-bar/>
+        <side-bar/>
+        <div style="padding: 2rem; margin-left: 50px;">
+          <h1 class="title text-uppercase text-start pb-4">
+            Gestión de Clases
+          </h1>
+          <p class="text-medium-emphasis text-justify">
+            En esta sección podrá gestionar las clases que se encuentran en su cuenta de Google Classroom.
+          </p>
+        </div>
         <v-container>
-          <div class="text-center">
-            <h1 class="title text-uppercase text-start pb-4">
-              Gestion de Clases
-            </h1>
-            <p class="text-body-1 text-medium-emphasis text-justify">
-              En esta sección podrá gestionar las clases que se encuentran en su cuenta de Google Classroom.
-            </p>
-            <v-spacer class="mx-auto my-5"></v-spacer>
-          </div>
-
-
           <v-sheet
             max-height="980"
-            class="d-flex flex-wrap justify-center justify-lg-center justify-md-center overflow-auto w-auto h-auto" color="white">
+            style="scroll-margin-block: 2rem; scroll-behavior: smooth"
+            class="d-flex flex-wrap justify-center justify-lg-center justify-md-center overflow-auto w-auto h-auto"
+            color="white">
+            <div style="position: absolute; right: 0; top: 0; margin: 1rem;">
+              <v-fade-transition>
+                <v-alert
+                  max-width="500px"
+                  max-height="300px"
+                  v-model="alert"
+                  border="start"
+                  variant="tonal"
+                  closable="true"
+                  close-label="Asignatura Agregada"
+                  color="grey-darken-3"
+                  title="Asignatura Agregada"
+                >
+                  Se ha agregado la asignatura correctamente a la base de datos.
+                </v-alert>
+              </v-fade-transition>
+            </div>
             <template v-for="course in courses" :key="course.id">
               <v-card
+                v-if="hasTeacherFolder(course)"
                 color="#181c25"
                 rounded="lg"
                 class="d-flex flex-column my-6 pa-2 mx-4"
@@ -38,17 +55,17 @@
                     {{ course.descriptionHeading }}
                   </div>
                 </v-card-text>
-<!--                Align content to bottom of the card -->
+
                 <v-card-actions class="align-end">
                   <v-btn
                     class="px-3 mt-5"
                     variant="flat"
                     color="#181c25"
                     content="bottom"
-                    @click="agregarCursoBD(course.id, course.name, course.enrollmentCode)"
+                    @click="agregarCursoBD(course.id, course.name, course.section)"
                   >
                     <v-icon color="white mx-1">mdi-plus</v-icon>
-                    <span class="ml-2 text-white me-1" >Agregar</span>
+                    <span class="ml-2 text-white me-1">Agregar</span>
                   </v-btn>
                   <v-spacer class="mx-0"/>
                   <v-btn
@@ -56,10 +73,11 @@
                     variant="tonal"
                     color="#181c25"
                     content="bottom"
-                    @click="agregarCursoBD(course.id, course.name, course.enrollmentCode)"
+
+                    :href="getTeacherFolder(course)"
                   >
                     <v-icon>mdi-google-drive</v-icon>
-                    <span class="ml-2 me-1" >Drive</span>
+                    <span class="ml-2 me-1">Drive</span>
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -83,7 +101,7 @@ import AppBar from "@/layouts/default/AppBar.vue";
 const router = useRouter();
 const accessStore = useAccessStore();
 const courses = ref([]);
-const loading = ref(true);
+const alert = ref(false);
 const ventanaConfirmar = ref(false);
 
 async function goBack() {
@@ -99,7 +117,11 @@ async function agregarCursoBD(id_Asignatura, nombreAsignatura, claveAsignatura) 
       nombreAsignatura,
       claveAsignatura
     );
-    alert(response.message);
+    console.log(response);
+    alert.value = true;
+    window.setInterval(() => {
+      alert.value = false;
+    }, 3000)
   } catch (error) {
     console.log(error);
   }
@@ -110,6 +132,7 @@ async function fetchCourses() {
   try {
     const response = await listCourses();
     courses.value = response;
+    console.log(courses.value);
   } catch (error) {
     console.error("Error listing courses:", error);
   }
@@ -119,6 +142,14 @@ async function fetchCourses() {
 async function showCourseWork(courseId) {
   const courseWork = await getCourseWork(courseId);
 }
+
+const hasTeacherFolder = (course) => {
+  return course.courseState === "ACTIVE" && course.teacherFolder;
+};
+
+const getTeacherFolder = (course) => {
+  return `https://drive.google.com/drive/folders/${course.teacherFolder.id}`;
+};
 
 onMounted(async () => {
   ventanaConfirmar.value = false;

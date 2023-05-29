@@ -2,7 +2,7 @@
   <v-app>
     <v-main class="flex-grow-1">
       <SideBar/>
-      <div style="padding: 2rem; margin-left: 50px;">
+      <div style="padding: 2rem; margin: 50px;">
         <h4 class="text-uppercase text-start py-0" style="font-size: 1.2rem;">
           Bienvenido de vuelta al
         </h4>
@@ -20,32 +20,30 @@
             v-for="item in cardItems" :key="item.title"
             color="#181c25"
             rounded="lg"
-            class="d-flex flex-column my-6 pa-2 mx-4"
+            border="true"
+            class="d-flex flex-column mx-8 my-10"
             variant="plain"
             min-width="400"
             max-width="400"
             min-height="150"
+            @click="goTo(item.to)"
           >
-            <v-img :src="item.cover" height="200px" cover></v-img>
+            <v-img
+              :src="item.cover" cover
+
+            />
 
             <v-card-text>
-              <div class="text-h6 font-weight-semibold mb-1 text-left py-2">
+              <h5
+                style="font-size: 1.2rem;"
+                class="font-weight-semibold mb-1 text-left py-2">
                 {{ item.title.toLocaleUpperCase() }}
-              </div>
-              <div class="text-body-4 text-medium-emphasis text-justify">
+              </h5>
+              <p
+                class="text-body-1 text-medium-emphasis text-justify">
                 {{ item.text }}
-              </div>
+              </p>
             </v-card-text>
-            <v-card-actions class="d-flex align-start px-4 mb-4">
-              <v-btn
-                class="px-3"
-                variant="text"
-                color="primary"
-                @click="goTo(item.to)"
-              >
-                Ir al modulo
-              </v-btn>
-            </v-card-actions>
           </v-card>
         </v-sheet>
       </v-container>
@@ -64,14 +62,14 @@ const user = accessStore.getUserProps;
 
 const cardItems = ref([
   {
-    title: "Evaluación de AE",
+    title: "Evaluación de Atributos de Egreso",
     text: "Aquí podrás evaluar los atributos de egreso correspondientes a tus clases.",
     to: "/evaluacion",
     cover:
       "https://cdn.pixabay.com/photo/2020/10/01/08/28/smileys-5617876_1280.jpg",
   },
   {
-    title: "Gestión de AE",
+    title: "Gestión de Atributos de Egreso",
     text: "Aquí podrás vincular los AE con los que estarás trabajando con respecto a tus clases.",
     to: "/gestionAE",
     cover:

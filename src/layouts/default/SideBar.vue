@@ -36,13 +36,13 @@
           color="#191D26"
           @click="logOut"
         >
-          <v-icon left color="#EAE0E0"
+          <v-icon left color="white"
                   style="scale: 90%">
             mdi-logout
           </v-icon>
           <v-spacer class="px-1"/>
           <span class="text-uppercase"
-                style="color:#EAE0E0; font-size: 0.85rem; "
+                style="color:white; font-size: 0.85rem; "
           >
             Cerrar sesión
           </span>
