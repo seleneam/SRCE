@@ -13,8 +13,8 @@
         </div>
         <v-container
           max-height="980"
-          style="scroll-margin-block: 2rem; scroll-behavior: smooth;"
-          class="d-flex flex-column justify-center" color="white"
+          style="flex-wrap: wrap; scroll-margin-block: 2rem; scroll-behavior: smooth; margin-left: 25px;"
+          class="d-flex flex-column justify-space-around" color="white"
         >
           <v-row class="py-2">
             <v-btn
@@ -29,7 +29,7 @@
           </v-row>
           <v-spacer class="my-4 mx-auto"></v-spacer>
           <v-card
-            class="d-flex flex-column justify-center"
+            class="d-flex flex-column justify-space-around mx-md-10"
             style="padding: 2rem;"
             color="grey-darken-3"
             variant="tonal"
@@ -38,9 +38,10 @@
             <!--AQUI SE INSTANCIAN LOS VALORES DE LA BD CON RESPECTO AL BOTON SELECCIONADO-->
             <v-row class="mx-2">
               <v-col
-                max-width="200px" min-width="200px" >
-                <v-sheet color="transparent" max-width="200px"
-                         min-width="200px">
+                max-width="100px" min-width="100px" >
+                <v-sheet
+                    color="transparent"
+                    max-width="100px" min-width="100px">
                   <v-list
                     v-model:opened="open"
                     bg-color="white"
@@ -68,7 +69,7 @@
                   </v-list>
                 </v-sheet>
               </v-col>
-              <v-divider vertical class="mx-4"></v-divider>
+              <v-divider vertical="true" class="mx-4" style="flex-wrap: wrap; position: relative; "></v-divider>
               <v-col>
                 <v-sheet
                   color="transparent"
