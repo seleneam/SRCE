@@ -13,10 +13,10 @@
         </div>
         <v-container
           max-height="980"
-          style="flex-wrap: wrap; scroll-margin-block: 2rem; scroll-behavior: smooth; margin-left: 25px;"
+          style=" scroll-margin-block: 2rem; scroll-behavior: smooth; margin-left: 25px;"
           class="d-flex flex-column justify-space-around" color="white"
         >
-          <v-row class="py-2">
+          <v-row class="py-2 px-12">
             <v-btn
               v-for="boton in botones" :key="boton.clave"
               color="#181c25"
