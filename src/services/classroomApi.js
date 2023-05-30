@@ -16,6 +16,23 @@ export const getSelectedCourses = async () => {
   }
 };
 
+export const saveIndicator = async (objDatos) => {
+  try {
+    const response = await axios.post(`${API_URL}/courses/bdSaveIndicator`, {
+      idIndicador: objDatos.value[6],
+      claveAsignatura: objDatos.value[0],
+      id_AE: objDatos.value[1],
+      idCD: objDatos.value[2],
+      descripcionIndicador: objDatos.value[3],
+      tareaIndicador: objDatos.value[4],
+      id_Tarea: objDatos.value[5],
+    });
+    //return response;
+  } catch (error) {
+    console.log("error en clasroom api" + error);
+  }
+};
+
 export const getTareasCurso = async () => {
   try {
     const response = await axios.post(`${API_URL}/courses/getTareasCurso`, {

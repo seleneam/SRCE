@@ -2,19 +2,21 @@
   <div class="main_container fade-in">
     <v-spacer class="mx-auto my-5"></v-spacer>
     <h1 class="title text-center text-uppercase">
-      Sistema Recolector de <br> Competencias Estudiantiles</h1>
+      Sistema Recolector de <br />
+      Competencias Estudiantiles
+    </h1>
     <v-btn
       class="login_button text-uppercase text-center mx-5"
-      style="width: 15vw;"
+      style="width: 15vw"
       color="#191D26"
       variant="flat"
       @click="signInWithGoogle"
     >
       <v-icon left class="mx-auto" color="#EAE0E0">mdi-google</v-icon>
-      <v-spacer class="mx-2"/>
-      <div class="login_button_text">Iniciar sesión </div>
+      <v-spacer class="mx-2" />
+      <div class="login_button_text">Iniciar sesión</div>
     </v-btn>
-    <div class="logo_container"/>
+    <div class="logo_container" />
   </div>
 </template>
 
@@ -54,7 +56,12 @@ const signInWithGoogle = () => {
       }
 
       accessStore.setAccessToken(res._tokenResponse.oauthAccessToken);
-      accessStore.setUserProps(res.user.displayName, res.user.photoURL, true);
+      accessStore.setUserProps(
+        res.user.displayName,
+        res.user.photoURL,
+        true,
+        res.user.email
+      );
       await router.push({ name: "Home" }); /*
       } else {
         await Swal.fire({
@@ -81,7 +88,7 @@ onMounted(() => {});
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width:  100vw;
+  width: 100vw;
   background-color: #fffdf6;
   background-image: url("@/assets/floor.svg");
   background-repeat: no-repeat;
@@ -91,7 +98,7 @@ onMounted(() => {});
 
 .logo_container {
   height: 90vh;
-  width:  100vw;
+  width: 100vw;
   background-image: url("@/assets/login-vector-img.svg");
   background-repeat: no-repeat;
   background-size: contain;
@@ -108,14 +115,14 @@ onMounted(() => {});
 .title {
   font-weight: 900;
   font-size: 2.5rem;
-  color: #1E1715;
+  color: #1e1715;
   margin-bottom: 2%;
 }
 
 .login_button_text {
   font-weight: 600;
   font-size: 1rem;
-  color: #EAE0E0;
+  color: #eae0e0;
   margin: 5% 2%;
 }
 
@@ -130,27 +137,47 @@ onMounted(() => {});
 }
 
 @keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-moz-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-o-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-ms-keyframes fadeIn {
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
